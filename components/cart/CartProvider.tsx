@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useReducer,
-  useState,
-  type ReactNode,
-} from "react";
+import { createContext, useContext, useMemo, useReducer, useState, type ReactNode } from "react";
 import { site, menu, type MenuItem } from "@/config/site";
 
 export type SelectedOption = { groupId: string; optionId: string; label: string; price: number };
@@ -31,10 +23,7 @@ type Action =
   | { type: "add"; line: CartLine }
   | { type: "setQty"; lineId: string; quantity: number }
   | { type: "remove"; lineId: string }
-  | { type: "clear" }
-  | { type: "hydrate"; state: State };
-
-const STORAGE_KEY = "asi-cart-v1";
+  | { type: "clear" };
 
 function sameConfig(a: CartLine, b: CartLine) {
   if (a.itemId !== b.itemId) return false;
@@ -45,8 +34,6 @@ function sameConfig(a: CartLine, b: CartLine) {
 
 function reducer(state: State, action: Action): State {
   switch (action.type) {
-    case "hydrate":
-      return action.state;
     case "add": {
       const existing = state.lines.find((l) => sameConfig(l, action.line));
       if (existing) {
@@ -93,31 +80,22 @@ type CartContextValue = {
 
 const CartContext = createContext<CartContextValue | null>(null);
 
+// One-time cleanup of the cart persistence this app used to have. Runs once
+// at module load in the browser — not tied to a component lifecycle, so it
+// can't reintroduce state restoration.
+if (typeof window !== "undefined") {
+  try {
+    window.localStorage.removeItem("asi-cart-v1");
+  } catch {
+    /* storage unavailable — nothing to clean up */
+  }
+}
+
 export function CartProvider({ children }: { children: ReactNode }) {
+  // Intentionally in-memory only — no localStorage/sessionStorage/cookie
+  // persistence. Every page load starts with an empty cart by design.
   const [state, dispatch] = useReducer(reducer, { lines: [] });
   const [isOpen, setIsOpen] = useState(false);
-  const [hydrated, setHydrated] = useState(false);
-
-  // Load from localStorage once
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) dispatch({ type: "hydrate", state: JSON.parse(raw) });
-    } catch {
-      /* ignore malformed storage */
-    }
-    setHydrated(true);
-  }, []);
-
-  // Persist
-  useEffect(() => {
-    if (!hydrated) return;
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    } catch {
-      /* storage full / unavailable */
-    }
-  }, [state, hydrated]);
 
   const subtotal = useMemo(
     () => state.lines.reduce((sum, l) => sum + l.unitPrice * l.quantity, 0),

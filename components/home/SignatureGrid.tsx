@@ -21,7 +21,7 @@ export function SignatureGrid() {
       <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {dishes.map((item, i) => (
           <Reveal key={item.id} delay={(i % 3) * 0.08}>
-            <DishCard item={item} />
+            <DishCard item={item} showModifiers={false} />
           </Reveal>
         ))}
       </div>
