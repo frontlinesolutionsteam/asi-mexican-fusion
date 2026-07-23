@@ -86,7 +86,7 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="transition-colors hover:text-gold"
               >
-                 Made by Frontline Solutions
+                 Website crafted by Frontline Solutions
               </a>
           </span>
           </div>
