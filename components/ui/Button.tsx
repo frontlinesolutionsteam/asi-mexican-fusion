@@ -51,7 +51,23 @@ export function ButtonLink({
   children,
   href,
   ...rest
-}: CommonProps & { href: string } & Omit<ComponentPropsWithoutRef<typeof Link>, "href">) {
+}: CommonProps & { href: string } & Omit<ComponentPropsWithoutRef<"a">, "href">) {
+  const isExternal = href.startsWith("http");
+
+  if (isExternal) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`${base} ${variants[variant]} ${sizes[size]} ${className}`}
+        {...rest}
+      >
+        {children}
+      </a>
+    );
+  }
+
   return (
     <Link
       href={href}
