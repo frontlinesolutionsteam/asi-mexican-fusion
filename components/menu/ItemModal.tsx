@@ -59,7 +59,7 @@ export function ItemModal({
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-[70] flex items-end justify-center sm:items-center"
+          className="fixed inset-0 z-[70] isolate flex items-end justify-center sm:items-center"
           initial="closed"
           animate="open"
           exit="closed"
@@ -67,8 +67,9 @@ export function ItemModal({
           <motion.button
             aria-label="Close"
             onClick={onClose}
-            className="absolute inset-0 bg-blue-ink/55 backdrop-blur-[2px]"
+            className="absolute inset-0 [transform:translateZ(0)] bg-blue-ink/55 backdrop-blur-[2px] [will-change:opacity]"
             variants={{ open: { opacity: 1 }, closed: { opacity: 0 } }}
+            transition={{ type: "tween", duration: 0.2, ease: "easeOut" }}
           />
           <motion.div
             role="dialog"

@@ -26,7 +26,7 @@ export function CartDrawer() {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-[60]"
+          className="fixed inset-0 z-[60] isolate"
           initial="closed"
           animate="open"
           exit="closed"
@@ -34,8 +34,9 @@ export function CartDrawer() {
           <motion.button
             aria-label="Close cart"
             onClick={closeCart}
-            className="absolute inset-0 bg-blue-ink/50 backdrop-blur-[2px]"
+            className="absolute inset-0 [transform:translateZ(0)] bg-blue-ink/50 backdrop-blur-[2px] [will-change:opacity]"
             variants={{ open: { opacity: 1 }, closed: { opacity: 0 } }}
+            transition={{ type: "tween", duration: 0.2, ease: "easeOut" }}
           />
           <motion.aside
             className="absolute right-0 top-0 flex h-full w-full max-w-md flex-col bg-cream-50 shadow-2xl"
