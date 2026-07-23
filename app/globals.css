@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Así Mexican Fusion Bistro — Design tokens
+   Palette extracted from the brand mockups:
+   cobalt wall blue · terracotta/chili · brass gold ·
+   warm cream · agave green · warm-brown ink
+   ============================================================ */
+
+@theme {
+  /* Brand color scale */
+  --color-cream: #f5edda;
+  --color-cream-50: #fbf6ea;
+  --color-cream-100: #f0e6cf;
+  --color-cream-200: #e7d9b8;
+
+  --color-blue: #16295b;
+  --color-blue-ink: #101f47;
+  --color-blue-600: #24387a;
+  --color-blue-300: #6d7cad;
+
+  --color-terracotta: #b4472e;
+  --color-chili: #c0402c;
+  --color-terracotta-700: #963722;
+
+  --color-gold: #c0963c;
+  --color-gold-soft: #d9b978;
+  --color-gold-deep: #9c7526;
+
+  --color-agave: #567042;
+  --color-agave-soft: #7d9464;
+
+  --color-ink: #3a2c22;
+  --color-ink-soft: #6a5a4c;
+
+  /* Fonts (wired via next/font in layout.tsx) */
+  --font-display: var(--font-bevan), Georgia, "Times New Roman", serif;
+  --font-body: var(--font-mulish), ui-sans-serif, system-ui, sans-serif;
+  --font-script: var(--font-dancing), "Segoe Script", cursive;
+  --font-logo: var(--font-cinzel), Georgia, serif;
+
+  /* Radii — soft rounded cards from the mockups */
+  --radius-card: 1.25rem;
+
+  /* Shadows — soft, warm, never harsh */
+  --shadow-card: 0 18px 40px -22px rgba(58, 44, 34, 0.45);
+  --shadow-soft: 0 10px 30px -18px rgba(58, 44, 34, 0.35);
+}
+
+:root {
+  --background: var(--color-cream);
+  --foreground: var(--color-ink);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Display headings share the vintage slab feel */
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.005em;
+  line-height: 0.98;
+}
+
+/* Letter-spaced brass eyebrow labels (e.g. "BOLD FLAVORS. TWO CULTURES.") */
+.eyebrow {
+  font-family: var(--font-body);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 0.78rem;
+}
+
+.font-script {
+  font-family: var(--font-script);
+}
+
+.font-logo {
+  font-family: var(--font-logo);
+  letter-spacing: 0.06em;
+}
+
+/* Warm focus ring for accessibility */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--color-gold-soft);
+  color: var(--color-blue-ink);
+}
+
+/* Respect reduced motion globally as a safety net */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
