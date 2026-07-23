@@ -54,13 +54,25 @@ export function Hero() {
           </Reveal>
 
           <Reveal immediate delay={0.32}>
-            <p className="mt-8 text-sm text-cream/80">
-              <a href={site.contact.phoneHref} className="font-semibold text-cream hover:text-gold">
-                {site.contact.phone}
-              </a>
-              <span className="mx-2 text-gold/60">◆</span>
+          <p className="mt-8 text-sm text-cream/80">
+            <a
+              href={site.contact.phoneHref}
+              className="font-semibold text-cream hover:text-gold"
+            >
+              {site.contact.phone}
+            </a>
+
+            <span className="mx-2 text-gold/60">◆</span>
+
+            <a
+              href="https://www.google.com/maps/dir/?api=1&destination=6239+Santa+Teresa+Blvd+San+Jose+CA"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-gold transition-colors"
+            >
               {site.contact.address.street}, {site.contact.address.city}
-            </p>
+            </a>
+          </p>
           </Reveal>
         </div>
       </div>
