@@ -37,7 +37,7 @@ export default function MenuPage() {
       <CategoryNav categories={populated} />
 
       <div className="mx-auto max-w-6xl px-5 py-12 sm:px-8 sm:py-16">
-        {populated.map((cat) => {
+        {populated.map((cat, catIndex) => {
           const items = menu.filter((m) => m.categoryId === cat.id);
           return (
             <section key={cat.id} id={`cat-${cat.id}`} className="scroll-mt-40 pb-14 last:pb-0">
@@ -48,7 +48,7 @@ export default function MenuPage() {
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {items.map((item, i) => (
                   <Reveal key={item.id} delay={(i % 3) * 0.06}>
-                    <DishCard item={item} />
+                    <DishCard item={item} priority={catIndex === 0 && i === 0} />
                   </Reveal>
                 ))}
               </div>

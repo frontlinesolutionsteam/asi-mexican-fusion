@@ -77,7 +77,7 @@ export function Nav() {
               type="button"
               onClick={openCart}
               className="relative rounded-full p-2.5 text-cream-50 transition-colors hover:bg-cream-50/10"
-              aria-label={`Open cart${count ? `, ${count} items` : ""}`}
+              aria-label={`Open cart${count ? `, ${count} ${count === 1 ? "item" : "items"}` : ""}`}
             >
               <BagIcon />
               {count > 0 && (

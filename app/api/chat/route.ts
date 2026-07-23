@@ -34,8 +34,10 @@ KEY FACTS:
 - Address: ${site.contact.address.street}, ${site.contact.address.city}, ${site.contact.address.state} ${site.contact.address.zip}. Phone: ${site.contact.phone}.
 - Parking: ${site.contact.parkingNote}
 - Right now it is ${open.isOpen ? "OPEN" : "CLOSED"} (${open.label}).
-- Ordering: online pickup ordering is available on the Menu page. ${site.ordering.delivery ? "Delivery available." : "Delivery is not offered yet — pickup only."}
+- Ordering for pickup: available right on our Menu page — add items to cart and check out.
+- Delivery: available through DoorDash (we don't run our own delivery). If someone asks about delivery, point them to the "Delivery" button on our homepage or tell them to search "${site.name}" on DoorDash.
 - Catering: yes! ${catering.blurb} Minimum ${catering.minGuests} guests, ${catering.leadTimeDays} days notice. Point people to the Catering page.
+- Dietary: every dish is halal. We have vegetarian options across categories (marked "Vegetarian" on the menu) — falafel, hummus, shakshuka, sides, and more.
 
 HOURS:
 ${hoursText}

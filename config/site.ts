@@ -36,6 +36,12 @@ export const site = {
     parkingNote: "Free parking in the plaza lot. Street parking on Santa Teresa Blvd.",
     instagram: "https://www.instagram.com/asimexicanfusion", // TODO: confirm handle
     yelp: "https://www.yelp.com/biz/asi-mexican-fusion-san-jose", // TODO: confirm URL
+    doordash:
+      "https://www.doordash.com/store/asi-mexican-fusion-bistro-san-jose-28377796/37461549/?event_type=autocomplete&pickup=false",
+    // Search link to the Google Business listing — used for "read/write a review"
+    // until a Place ID is confirmed and swapped in below.
+    googleReviewSearchUrl:
+      "https://www.google.com/search?q=As%C3%AD+Mexican+Fusion+Bistro+San+Jose+reviews",
   },
 
   // ---- Hours (easy to edit) ---------------------------------------------
@@ -397,8 +403,27 @@ export const reviews: Review[] = [
 ];
 
 /* ---------------------------------------------------------------------------
-   STORY & CATERING copy
+   GOOGLE REVIEWS
+   Intentionally empty until real reviews are wired up — do NOT fill this with
+   invented quotes. Two ways to populate it:
+
+   1. Manual (fastest): copy real quotes from the Así Google Business Profile
+      into the array below, matching the GoogleReview shape.
+   2. Live (automated): call the Google Places API "Place Details" endpoint
+      server-side (needs a Places API key + the location's Place ID) and map
+      the `reviews[]` field it returns onto GoogleReview — do this in a
+      server component or API route, never client-side, so the key stays
+      secret. The homepage component already renders whatever this array
+      contains, so swapping in live data requires no UI changes.
 --------------------------------------------------------------------------- */
+export type GoogleReview = {
+  author: string;
+  rating: number; // 1-5
+  quote: string;
+  relativeTime: string; // e.g. "2 weeks ago" — as shown by Google
+};
+
+export const googleReviews: GoogleReview[] = [];
 export const story = {
   headline: ["Two flags.", "One family.", "One kitchen."],
   founders: "Lourdes Barraza & her daughter Isabella Astorga",
