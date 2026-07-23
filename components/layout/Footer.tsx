@@ -79,8 +79,16 @@ export function Footer() {
           <div className="flex items-center gap-2">
             <Image src={site.images.butterflyMark} alt="" width={373} height={250} className="h-5 w-8 object-contain" />
             <span>
-              © {new Date().getFullYear()} {site.name}. Made with heart in San Jose.
-            </span>
+               © {new Date().getFullYear()} {site.name}. Made with heart in San Jose.{" "}
+              <a
+                href="https://frontlinesolutions.my"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-gold"
+              >
+                 Made by Frontline Solutions
+              </a>
+          </span>
           </div>
           <p className="font-script text-lg text-gold-soft">{story.scriptLine}</p>
         </div>
